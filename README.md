@@ -8,14 +8,14 @@
 </p>
 
 
-###Parametro para executar um contair é o $docker run
+### Parametro para executar um contair é o $docker run
 
 ```sh
 
 docker run hello-world
 
 ```
-####Ele irá até o docker hub, fará download do container e irá executar. Caso seja dado #docker ps ele não irá aparecer, pois ele ja executou a sua função e fechou.
+#### Ele irá até o docker hub, fará download do container e irá executar. Caso seja dado #docker ps ele não irá aparecer, pois ele ja executou a sua função e fechou.
 
 ```sh
 
@@ -23,7 +23,7 @@ docker ps
 
 ```
 
-###Para mostrar todas as imagens no S.O
+### Para mostrar todas as imagens no S.O
 
 ```sh
 
@@ -31,7 +31,7 @@ docker images
 
 ```
 
-###Visualizar todos os containers da máquina, mesmo parados e finalizados (Atenção é importante administrar container parados e antigos)
+### Visualizar todos os containers da máquina, mesmo parados e finalizados (Atenção é importante administrar container parados e antigos)
 
 ```sh
 
@@ -39,7 +39,7 @@ docker ps -a
 
 ```
 
-###Parametros do docker run
+### Parametros do docker run
 
 ```sh
 
@@ -49,7 +49,7 @@ docker ps -a
 
 ```
 
-###Exemplo:
+### Exemplo:
 
 ```sh
 
@@ -62,7 +62,7 @@ docker run -ti ubuntu /bin/bash
        - Apertando CTRL+D mata o shell e fecha o container
        - Apertando CTRL+PQ sai do container e mantem rodando
 
-###Para voltar ao container, basta dar attach no mesmo
+### Para voltar ao container, basta dar attach no mesmo
 
 ```sh
 
@@ -70,7 +70,7 @@ docker attach <CONTAINER ID>
 
 ```
 
-###Para criar um container (Ele não é executado)
+### Para criar um container (Ele não é executado)
 
 ```sh
 
@@ -78,7 +78,7 @@ docker create <nome_do_container>
 docker run -ti <nome_do_container>
 
 ```
-###Parar um container
+### Parar um container
 
 ```sh
 
@@ -86,7 +86,7 @@ docker stop <CONTAINER ID>
 
 ```
 
-###Iniciar um containers
+### Iniciar um containers
 
 ```sh
 
@@ -94,7 +94,7 @@ docker start <CONTAINER ID>
 
 ```
 
-###Pausar um container
+### Pausar um container
 
 ```sh
 
@@ -102,7 +102,7 @@ docker pause <CONTAINER ID>
 
 ```
 
-###Despausar um container
+### Despausar um container
 
 ```sh
 
@@ -110,7 +110,7 @@ docker unpause <CONTAINER ID>
 
 ```
 
-###Verificar os recursos consumidos pelo container
+### Verificar os recursos consumidos pelo container
 
 ```sh
 
@@ -118,7 +118,7 @@ docker stats <CONTAINER ID>
 
 ```
 
-###TOP do docker para mais detalhes do containers
+### TOP do docker para mais detalhes do containers
 
 ```sh
 
@@ -126,7 +126,7 @@ docker top <CONTAINER ID>
 
 ```
 
-###Verificar as logs de um container
+### Verificar as logs de um container
 
 ```sh
 
@@ -134,7 +134,7 @@ docker logs <CONTAINER ID>
 
 ```
 
-###Deletar um container
+### Deletar um container
 
 ```sh
 
@@ -145,7 +145,7 @@ docker rm <CONTAINER ID>
   - OBS:. Se o container estiver em execução você não consegue remove-lo, sendo necessário dar um stop ou usar o parametro -f de force
 
 
-###Limitação de Recursos nos Containers
+### Limitação de Recursos nos Containers
 
        - Caso não seja passado nenhuma limitação, o container nao terá limites de utilização de recursos
        - Para monitorar os recursos utilizamos:
@@ -165,7 +165,7 @@ docker inspect <CONTAINER ID> | grep -i "mem"
 ```
   - Quando a primeira linha memory está com valor 0, quer dizer que não há limitação de utilização de memoria
 
-###Criando a limitação de memória para o exemplo de 512MB
+### Criando a limitação de memória para o exemplo de 512MB
 
 ```sh
 
@@ -175,14 +175,14 @@ docker run --memory 512m --name teste_memoria centos <CONTAINER ID>
 
   - Executando o mesmo comando anterior para fazer o inspect é possivel ver que o campo memoria ficou agora limitado aos 512MB
 
-###Alterando memória de um container já em execução para 256MB
+### Alterando memória de um container já em execução para 256MB
 
 ```sh
 
 docker update --memory 256m <CONTAINER ID>
 
 ```
-#Limitando recursos de CPU
+### Limitando recursos de CPU
 
 ```sh
 
@@ -211,7 +211,7 @@ docker update --cpu 0.5 <CONTAINER ID>
 docker inspect <docker_name | CONTAINER ID | grep -i "cpu"
 
 ```
-###Volumes e container data-only
+### Volumes e container data-only
 
 
 ```sh
