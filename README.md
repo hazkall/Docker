@@ -332,7 +332,8 @@ docker build --file DockerFile -t "minhapri:1.0" .
 
   - DockeFile utilizado de exemplo:
   
- Dockerfile:
+```sh 
+Dockerfile:
 FROM debian
 MAINTAINER Felipe Dias
 RUN apt-get update -y && \
@@ -345,8 +346,4 @@ EXPOSE 80
 USER $user
 VOLUME /Apache
 WORKDIR /Apache
-    
-    
-    
-    
-    
+```    
