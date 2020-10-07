@@ -307,17 +307,17 @@ kamui/postgresql
     
     - CMD -> Parametro do EntryPoint
     
-    -ENV -> Determina variaveis de ambiente para o container
+    - ENV -> Determina variaveis de ambiente para o container
     
-    -EXPOSE -> Mostra qual porta do container está disponivel para acesso  e precisar ser exposta
+    - EXPOSE -> Mostra qual porta do container está disponivel para acesso  e precisar ser exposta
     
-    -RUN -> permite a execução de instruções dentro do container(Muito usado para efetuar a instalação de pacotes) OBS:. quanto menos RUN melhor, ou seja menos camadas. É importante que somente a camada de cima (Ultima executada tem direito write, a anterior vira read-only).
+    - RUN -> permite a execução de instruções dentro do container(Muito usado para efetuar a instalação de pacotes) OBS:. quanto menos RUN melhor, ou seja menos camadas. É importante que somente a camada de cima (Ultima executada tem direito write, a anterior vira read-only).
     
-    -USER -> usuário para aquela imagem de container, se nada for associado será utilizado root
+    - USER -> usuário para aquela imagem de container, se nada for associado será utilizado root
     
     - VOLUME -> Volume criado para o container
     
-    -WORKDIR -> Aponta qual diretorio raiz do container
+    - WORKDIR -> Aponta qual diretorio raiz do container
     
 ###Processo de Build utilizando Dockerfile
     
