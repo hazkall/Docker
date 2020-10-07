@@ -289,4 +289,64 @@ kamui/postgresql
 ```
 
   - É possivel verificar agora os 2 containers gravado os dados no volume do primeiro container utilizando o comando #docker inspect dbdados -f {{.Mounts}}
+  
+  ###Efetuando a criação de Dockerfiles
+  
+  - Parametros do DockerFile
+    - FROM -> Primeiro parametro passado ao DOCKERFILE, parametro que aponta qual a imagem usada como base para montar a sua imagem
+    
+    - MAINTAINER -> Escrito do Dockerfile
+    
+    - ADD -> Joga um arquivo do host para dentro do container e arquivos empacotados também
+    
+    - LABEL -> Função de colocar Metadata (Versões, Fabricantes, Descrição)
+    
+    - COPY -> Função de copiar arquivos e diretorios para dentro do container
+    
+    - ENTRYPOINT -> Permite que um processo seja o principal dentro do container (Caso ele paro ou morra, o container morre):Exemplo colocando o apache como                                 entrypoint e caso ele morra, o container para.
+    
+    - CMD -> Parametro do EntryPoint
+    
+    -ENV -> Determina variaveis de ambiente para o container
+    
+    -EXPOSE -> Mostra qual porta do container está disponivel para acesso  e precisar ser exposta
+    
+    -RUN -> permite a execução de instruções dentro do container(Muito usado para efetuar a instalação de pacotes) OBS:. quanto menos RUN melhor, ou seja menos camadas. É importante que somente a camada de cima (Ultima executada tem direito write, a anterior vira read-only).
+    
+    -USER -> usuário para aquela imagem de container, se nada for associado será utilizado root
+    
+    - VOLUME -> Volume criado para o container
+    
+    -WORKDIR -> Aponta qual diretorio raiz do container
+    
+###Processo de Build utilizando Dockerfile
+    
+    - É preciso passar o nome da imagem parametro -t e também a versão parametro usando : após o nome da IMG
+    - Voce não aponta diretamente o docker file, mas sim o local do seu diretorio. Exemplo abaixo .
+    
+```sh
 
+docker build --file DockerFile -t "minhapri:1.0" .
+
+```
+
+  - DockeFile utilizado de exemplo:
+  
+ Dockerfile:
+FROM debian
+MAINTAINER Felipe Dias
+RUN apt-get update -y && \
+apt-get install -y apache2 && \
+apt-get clean
+LABEL Description="Primeiro apache"
+ENTRYPOINT ["/usr/bin/apachectl", "-D", "FOREGROUND"]
+ENV user="Felipe"
+EXPOSE 80
+USER $user
+VOLUME /Apache
+WORKDIR /Apache
+    
+    
+    
+    
+    
