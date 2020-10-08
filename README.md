@@ -293,6 +293,7 @@ kamui/postgresql
   ###Efetuando a criação de Dockerfiles
   
   - Parametros do DockerFile
+  
     - FROM -> Primeiro parametro passado ao DOCKERFILE, parametro que aponta qual a imagem usada como base para montar a sua imagem
     
     - MAINTAINER -> Escrito do Dockerfile
@@ -333,6 +334,7 @@ docker build --file DockerFile -t "minhapri:1.0" .
   - DockeFile utilizado de exemplo:
   
 ```sh 
+
 Dockerfile:
 FROM debian
 MAINTAINER Felipe Dias
@@ -346,4 +348,70 @@ EXPOSE 80
 USER $user
 VOLUME /Apache
 WORKDIR /Apache
+
 ```    
+
+### Executando os dockerfiles
+
+  
+```sh 
+
+mkdir -p /root/dockerfiles/Apache
+cd /root/dockerfiles/Apache
+docker build -t webserver:1.0 .
+docker run -ti webserver:1.0
+#Ponto importante, não definimos na criação do container para rodar o serviço do apache, então será necessário realizar manualmente dentro do container: #service apache2 start
+
+```   
+  -Dockerfile criado no exercício
+
+```sh 
+
+Dockerfile:
+FROM debian
+RUN apt-get update -y && \
+apt-get install -y apache2 && \
+apt-get clean
+ENV APACHE_LOCK-DIR="/var/lock"
+ENV APACHE_PID_FILE="/var/run/apache2.pid"
+ENV APACHE_RUN_USER="www-data"
+ENV APACHE_RUN_GROUP="www-data"
+ENV APACHE_LOG_DIR="/var/log/apache2"
+LABEL Description="Webserver"
+VOLUME /var/www/html
+EXPOSE 80
+
+```
+
+### Visualizar as camadas do container
+
+```sh 
+
+docker history <image>
+
+```
+### Apagar IMAGE
+
+```sh 
+
+docker rmi -f <IMAGE_ID> || tag
+
+```
+
+### Docker Hub (Ponto importante para subir uma image para o Docker HUB precisar seguir a notação de utilizar o user/tag)
+
+  - Alterar a tag do container (-t do build)
+
+```sh 
+
+docker tag <IMAGE_ID> lipenodias/webserver:1.0
+docker login
+docker push <IMAGE_ID> | docker push <user/tag>
+
+  #procurar repositorio
+docker search lipenodias
+
+  #baixar image do docker hub 
+docker pull user/tag
+
+```
