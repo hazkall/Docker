@@ -438,3 +438,21 @@ VOLUME /var/www/html
 EXPOSE 80
 
 ```
+
+# Metodo de distribuição local DOCKER Registry(Distribution)
+  - Solução muito utilizando em meios corporativos em alternativa ao Docker HUB
+  - Pegamos a ultima image do Docker Hub para o registry
+  - Antes de subirmos no registry precisamos seguir o padrão de tag <ServerName:Port/(image_name)>
+
+```sh 
+
+docker run -d -p 5000:5000 --restartlways --name registry registry:latest
+docker images
+docker tag <IMAGE_ID> localhost:5000/webserver:1.0
+docker push <IMAGE_tag>
+
+#visualisar todas as images
+
+curl localhost:5000/v2/_catalog
+
+```
