@@ -456,3 +456,46 @@ docker push <IMAGE_tag>
 curl localhost:5000/v2/_catalog
 
 ```
+# Configuração de rede dos containers
+
+- Parametros
+  
+  - --dns --> passe o servidor DNS 
+  - --hostname --> defini o hostname para o container
+  - --link --> Faz o link entre containers
+  - --expose --> Expõe a porta do container
+  - --publish --> da Bind entre duas portas (Exemplo 8080 -> 80) || -p --> Aponta a porta Host_PORT:Container_PORT
+  - --mac-address --> personaliza o MAC-ADDRESS
+  - --net --> toda parte de network é direcionada do host (--net=host)
+  
+```sh
+
+docker run -d --name apache --hostname apache2020 --dns 8.8.8.8 webserver:1.0
+docker run -ti --name jumpserver --hostname jump2020 --dns 8.8.8 --link apache centos
+docker run -ti -publish 8080:80 --hostname webserver debian
+
+```
+# Docker Machine 
+
+  - Consegue criar hostdocker para ser rodado em qualquer ecosistema
+
+  - Instalação Docker Machine:
+
+```sh
+
+  base=https://github.com/docker/machine/releases/download/v0.16.0 &&
+  curl -L $base/docker-machine-$(uname -s)-$(uname -m) >/tmp/docker-machine &&
+  sudo mv /tmp/docker-machine /usr/local/bin/docker-machine &&
+  chmod +x /usr/local/bin/docker-machine
+
+```
+
+  - o Docker-machine, identifica AWS, Azure Google Cloud, VirtualBox como se fosse um driver (Utilizamos o parametro --driver)
+
+  - Criando o hostdocker:
+
+```sh
+
+docker-machine create --driver virtualbox dockerlab
+
+```
