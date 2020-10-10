@@ -499,3 +499,26 @@ docker run -ti -publish 8080:80 --hostname webserver debian
 docker-machine create --driver virtualbox dockerlab
 
 ```
+
+  - Conectando ao hostdocker
+
+```sh
+
+docker-machine env labdocker
+
+#O comando terá a saida das variavés necessária para conexão ao hostdocker
+#Usamos o enval para setar #eval $(docker-machine env labdocker)
+#A partir de agora todos os containers e images baixas ou criadas não serão carregados mais na máquina. Será tudo carregado no driver, no caso de exemplo aqui o VirtualBox
+
+```
+Parametros:
+  - docker-machine ip <host_docker> --> mostra ip do docker machine 
+  - docker-machine ssh <host_docker> --> conectado via ssh no hostdocker 
+  - docker-machine inspect <host_docker> --> mesma função do docker original, para inspeção do hostdocker
+  - docker-machine stop <host_docker> --> para a docker machine
+  - docker-machine start <host_docker> --> inicia o docker machine
+  - docker-machine ls --> lista as docker machines
+  - docker-machine rm <host_docker> --> remove o docker machine
+
+
+
