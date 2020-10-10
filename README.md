@@ -520,5 +520,84 @@ Parametros:
   - docker-machine ls --> lista as docker machines
   - docker-machine rm <host_docker> --> remove o docker machine
 
+# Docker Compose
 
+  - Em um unico arquivo é possivel colocar toda a solução de ambiente, exemplo: É possivel em um unico arquivo criar 3 containers Ex: Postgree,Apache,Jenkins
+  - Fazemos através de um através de um composefile
 
+# Instalação do docker-compose
+
+```sh
+
+sudo curl -L "https://github.com/docker/compose/releases/download/1.27.4/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+sudo chmod +x /usr/local/bin/docker-compose
+
+```
+
+  - docker-compose scale --> Reescala a quantidade de containers aumentando ou diminuindo a quantidade do mesmo container para atender demandas.
+
+- Parametros do YAML para compose:
+  
+  - build -> caminho do dockerfile (build: Apache/.)
+  - command --> executa um comando no container (command: bundle exec thin -p 3000)
+  - container_name --> Nome para o container (container_name: my-web-container)
+  - dns --> indica o dns server (dns: 8.8.8.8)
+  - dns_search --> especifica um search domain (dns_search: example.com)
+  - dockerfile -> especifica um dockerfile alternativo (dockerfile: Dockerfile-alternate)
+  - env_file --> Especifica um arquivo com variaveis de ambiente(env_file: .env)
+  - environment --> Adiciona variaveis de ambiente (
+      environment:
+        RACK_ENV: development)
+  - expose --> Expoe a porta do container (
+      expose:
+        - "3000"
+        - "8000")
+  - external_links --> "Linka" containers que não estão especificado no docker compose atual (
+      external_links:
+        - redis_1
+        - project_db_1:mysql)
+  - extra_hosts --> Adiciona uma entrada no /etc/hosts do container (
+      extra_hosts:
+        - "somehost: 162.242.195.82"
+        - "otherhost: 50.31.209.229")
+  - image --> indica uma imagem (image : ubuntu14.04)
+  - labels --> adiciona metada (
+      labels:
+        com.example.description: "Accouting webapp"
+        com.example.department: "Finance")
+  - links --> Linka containers dentro do mesmo docker-compose (
+      links:
+        - db
+        - db: database)
+  - log_driver --> Indica o formato do log a ser gerado, por exemplo: syslog, json-file, etc (log_driver: syslog
+  
+         || 
+   
+      logging:
+        driver: syslog)
+  - log_output --> Indica onde mandar os logs, pode ser local ou em um syslog remoto (
+      log_output:
+        syslog-address: "tcp://192.168.0.2"
+        
+        ||
+      logging:
+        driver: syslog
+        options:
+          syslog-address: "tcp://192.168.0.2")
+  - net --> Modo de uso da rede (net: "bridge" || net: "host")
+  - ports --> Expoe as portas do container e do host (
+      ports:
+        - "3000"
+        - "8000":8000)
+  - volumes, volumes_driver --> Monta volume do container (
+      volumes:
+      #Apenas especificar o caminho e a engine criará o volume
+        - /var/lib/mysql
+      #Especificar um caminho absoluto para mapeamento
+        - /opt/data:/var/lib/mysql
+      #Caminho no host, relativo ao compose file
+        - ./cache:/tmp/cache)
+  - volumes_from -> Monta volumes através de outro container(
+      volumes_from:
+        -service_name
+        -service name: ro)
