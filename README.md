@@ -294,6 +294,8 @@ kamui/postgresql
   
   - Parametros do DockerFile
   
+  ```
+  
     - FROM -> Primeiro parametro passado ao DOCKERFILE, parametro que aponta qual a imagem usada como base para montar a sua imagem
     
     - MAINTAINER -> Escrito do Dockerfile
@@ -319,6 +321,8 @@ kamui/postgresql
     - VOLUME -> Volume criado para o container
     
     - WORKDIR -> Aponta qual diretorio raiz do container
+    
+ ```
     
 ###Processo de Build utilizando Dockerfile
     
