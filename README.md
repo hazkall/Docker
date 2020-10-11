@@ -537,7 +537,8 @@ sudo chmod +x /usr/local/bin/docker-compose
   - docker-compose scale --> Reescala a quantidade de containers aumentando ou diminuindo a quantidade do mesmo container para atender demandas.
 
 - Parametros do YAML para compose:
-  
+
+ ``` 
   - build -> caminho do dockerfile (build: Apache/.)
   - command --> executa um comando no container (command: bundle exec thin -p 3000)
   - container_name --> Nome para o container (container_name: my-web-container)
@@ -601,3 +602,102 @@ sudo chmod +x /usr/local/bin/docker-compose
       volumes_from:
         -service_name
         -service name: ro)
+```
+
+# Implantando o Docker Compose
+
+  - Criando YAML compose
+
+```
+db:
+  image: postgres
+web:
+  build: .
+  command: 'python manage.py runserver 0.0.0.0:8000'
+  links:
+    - db
+  ports:
+    - '8000:8000'
+  volumes:
+    - '.:/code'
+```
+
+
+  - Criando Dockerfile
+
+```
+Dockerfile:
+FROM python:2.7
+ENV PYTHONUNBUFFERED 1
+RUN mkdir /code
+WORKDIR /code
+ADD requirements.txt /code/
+RUN pip install -r requirements.txt
+ADD . /code/
+```
+
+  - Criando requirements para as dependencias do Python
+  
+```
+Django
+psycopg2
+```
+  - Executando somente a sessão web com docker-compose, usando o dockerfile e docker-compose do diretorio atual
+  
+```sh
+
+docker-compose run web django-admin.py startproject composeexample .
+
+```
+
+  - Subindo o ambiente no docker-compose, como daemon
+
+```sh
+
+docker-compose up -d
+
+```
+  - Verificando todas as instancias do docker-compose
+
+```sh
+
+docker-compose ps
+
+```
+
+  - Fazendo o escalonamento dos containers, exemplo subindo mais 5 instancias de containers
+
+```sh
+
+docker-compose scale db=5
+
+```
+
+  - Parando as sessões de container
+
+```sh
+
+docker-compose stop
+
+```
+
+  - Start novamente nas sessões de container
+
+```sh
+
+docker-compose start
+
+```
+
+  - Verificação dos logs  
+
+```sh
+
+docker-compose logs
+
+```
+
+
+
+
+
