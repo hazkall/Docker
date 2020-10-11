@@ -258,6 +258,7 @@ OBS:. Paramentros novos:
 -p -> expor uma porta para o container
 -e -> setar a variavel de ambiente
 -d -> rodar como daemon
+--rm --> deletar o container com o mesmo nome atual e criar um novo
 --volumes-from -> aponta qual será o container data-only
 
   - Subindo 2 containers:
